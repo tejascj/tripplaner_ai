@@ -9,22 +9,9 @@
 
 • Uses imgur API to upload images to the cloud and retrieve them for display
 
-## Available Scripts
+## MongoDB
+Create a MongoDB database named trip_login and in that collection named users.
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `node index.js`
-Runs the server in the development mode.
-
-<!-- replace all the env variables -->
 ## Environment Variables
 Replace all the environment variables in the .env file with your own values.
 ### •	OpenAI variables
@@ -43,3 +30,18 @@ Create an account on Gmail (https://mail.google.com/mail/u/0/#inbox) and get you
 ### IMGUR_CLIENT_ID
 If you want to uplaod images ananymously, no need to create an account on Imgur. Otherwise,
 Create an account on Imgur (https://api.imgur.com/oauth2/addclient) and get your client ID.
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
+
+### `node index.js`
+Runs the server in the development mode.

@@ -199,7 +199,7 @@ app.post('/update-user-itinerary', async (req, res) => {
       { returnOriginal: false }
     );
 
-    res.send({ message: 'User document updated.' });
+    res.send({ message: 'User document updated.', result: result });
     console.log("User document updated.")
     client.close();
   } catch (err) {
@@ -324,7 +324,7 @@ app.post('/openai', async (req, res) => {
   const itinerary = openAiResponse.data.choices[0];
   const pointsOfInterestPrompt = 'Extract the points of interest out of this text, with no additional words, separated by commas: ' + itinerary.text;
   // Log OpenAI response
-  // console.log(openAiResponse.data);
+  // console.log(openAiResponse.data.choices[0].text);
   // console.log(itinerary.text);
   // Send OpenAI response to the frontend
   res.json({ openAiResponse: openAiResponse.data, pointsOfInterestPrompt });

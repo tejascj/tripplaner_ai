@@ -121,11 +121,10 @@ function Home(props) {
     const [openAiResponse, setOpenAiResponse] = useState(null);
     const [amadeusResponse, setAmadeusResponse] = useState(null);
     const [pointOfInterest, setPointOfInterest] = useState(null);
+    const [bookingloading, setBookingLoading] = useState(false);
     // console.log(amadeus);
     const handleSubmit = (e) => {
         e.preventDefault();
-        setLoading(true);
-
         const requestData = {
             destination: destination,
             days: days,
@@ -137,7 +136,7 @@ function Home(props) {
 
         // Only send Amadeus request if checkbox is checked
         if (isChecked) {
-            setLoading(true);
+            setBookingLoading(true);
             fetch('http://localhost:3001/flight', {
                 method: 'POST',
                 headers: {
@@ -149,12 +148,11 @@ function Home(props) {
                 .then(data => {
                     console.log("Amadeus Response: ", data);
                     setAmadeusResponse(data);
-                    setLoading(false);
+                    setBookingLoading(false);
                 });
         }
 
         // Always send OpenAI request
-        if (openAiResponse === null) {
             setLoading(true);
             fetch('http://localhost:3001/openai', {
                 method: 'POST',
@@ -164,8 +162,9 @@ function Home(props) {
                 body: JSON.stringify(requestData)
             }).then(res => res.json())
                 .then(data => {
-                    console.log("OpenAI Response: ", data.openAiResponse);
+                    // console.log("OpenAI Response: ", data.openAiResponse);
                     setOpenAiResponse(data.openAiResponse);
+
 
                     // console.log("Itinerary: ", data.openAiResponse.choices[0].text);
                     const openAiResponseData = data.openAiResponse;
@@ -223,7 +222,7 @@ function Home(props) {
                                 });
                         });
                 });
-        }
+        
     };
     // Payment form handling
     const [cardNumber, setCardNumber] = useState('');
@@ -262,7 +261,7 @@ function Home(props) {
         console.log("randomCharacters: ", randomCharacters, "randomNumbers: ", randomNumbers, "randomNumber: ", randomNumber);
         return randomNumber;
     }
-    const [bookingloading, setBookingLoading] = useState(false);
+    
     const [confirmationId, setConfirmationId] = useState('');
     const [bookingDate, setBookingDate] = useState('');
     // create variables for error mesasges for each field
@@ -294,7 +293,7 @@ function Home(props) {
             return;
         }
         // Validate the email address
-       
+
 
         // Validate the credit card information
         if (!cardNumber || !cardName || !cvv || !expiry) {
@@ -500,8 +499,14 @@ function Home(props) {
                     </div>
                 </form>
             </div>
-            {openAiResponse || amadeusResponse && (
-                <div className="container-fluid bg-white border">
+
+            
+                    {bookingloading  && isChecked && (
+                        <button className="btn btn-primary m-4 p-2" type="button" disabled>
+                            <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                            Flight Loading...
+                        </button>
+                    )}
                     {amadeusResponse && (
 
                         <div className="container my-3 p-3 w-100 bg-white border">
@@ -685,13 +690,13 @@ function Home(props) {
                                                                                     />
                                                                                     {emailError && <div className='text-danger'>{emailError}</div>}
                                                                                     <h6>Phone Number</h6>
-                                                                                    <input 
-                                                                                    type="text" 
-                                                                                    className="form-control mb-3" 
-                                                                                    placeholder="Phone Number" 
-                                                                                    value={Contact} 
-                                                                                    onChange={handleconstactInputChange} 
-                                                                                    onFocus={() => {setContactError('')}}
+                                                                                    <input
+                                                                                        type="text"
+                                                                                        className="form-control mb-3"
+                                                                                        placeholder="Phone Number"
+                                                                                        value={Contact}
+                                                                                        onChange={handleconstactInputChange}
+                                                                                        onFocus={() => { setContactError('') }}
                                                                                     />
                                                                                     {contactError && <div className='text-danger'>{contactError}</div>}
                                                                                 </div>
@@ -705,38 +710,38 @@ function Home(props) {
                                                                                             onChange={handleCardNumberChange}
                                                                                             maxLength="19"
                                                                                             placeholder="Card Number"
-                                                                                            onFocus={() => {setCardError('')}}
+                                                                                            onFocus={() => { setCardError('') }}
                                                                                             required />
                                                                                         <input type="text" className="form-control mb-3" value={cardName}
                                                                                             placeholder="Name on Card"
                                                                                             onChange={handleCardNameChange}
-                                                                                            onFocus={() => {setCardError('')}}
+                                                                                            onFocus={() => { setCardError('') }}
                                                                                             required />
 
                                                                                         <input type="text" className="form-control mb-3"
                                                                                             onChange={handleExpiryChange}
                                                                                             maxLength="5"
                                                                                             placeholder="MM/YY"
-                                                                                            onFocus={() => {setCardError('')}}
+                                                                                            onFocus={() => { setCardError('') }}
                                                                                             required />
                                                                                         <input type="text" className="form-control mb-3"
                                                                                             placeholder="CVV"
                                                                                             value={cvv}
                                                                                             onChange={handleCvvChange}
                                                                                             maxLength="3"
-                                                                                            onFocus={() => {setCardError('')}}
+                                                                                            onFocus={() => { setCardError('') }}
                                                                                             required />
                                                                                     </div>
                                                                                     {cardError && <div className='text-danger'>{cardError}</div>}
                                                                                 </div>
                                                                             </div>
-                                                                            <input 
-                                                                            type="checkbox" 
-                                                                            className="form-check-input mb-3" 
-                                                                            id="terms" 
-                                                                            onChange={handleAgreeChange}
-                                                                            onFocus={() => {setTermsError('')}}
-                                                                            required />
+                                                                            <input
+                                                                                type="checkbox"
+                                                                                className="form-check-input mb-3"
+                                                                                id="terms"
+                                                                                onChange={handleAgreeChange}
+                                                                                onFocus={() => { setTermsError('') }}
+                                                                                required />
                                                                             <label htmlFor="terms" className="form-check-label">I agree to the terms and conditions</label>
                                                                             {termsError && <div className='text-danger'>{termsError}</div>}
                                                                         </div>
@@ -825,10 +830,10 @@ function Home(props) {
                         <button onClick={handleShowMore}>Show More</button>
                     }
                     {/* OpenAI Response */}
-                    {loading && openAiResponse == null && (
+                    {loading && (
                         <button className="btn btn-primary m-4 p-2" type="button" disabled>
                             <span className="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                            Loading...
+                            Trip Loading...
                         </button>
                     )}
 
@@ -847,10 +852,12 @@ function Home(props) {
                                         {/* create sub title as Trip itienary */}
                                         <h2>Flight Itienary</h2>
                                         <p>
-                                            {openAiResponse && openAiResponse.choices[0].text.split('\n').map((item, i) => {
-                                                return <React.Fragment key={i}>{item}<br /></React.Fragment>;
-                                            })
-                                            }
+                                            {openAiResponse.choices[0].text.split('\n').map((item, i) => (
+                                                <React.Fragment key={i}>
+                                                    {item}
+                                                    <br />
+                                                </React.Fragment>
+                                            ))}
                                         </p>
                                     </div>
                                 </div>
@@ -889,8 +896,8 @@ function Home(props) {
 
                         </div>
                     ) : null}
-                </div>
-            )}
+
+               
 
         </div>
 
