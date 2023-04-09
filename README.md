@@ -1,6 +1,13 @@
-# Getting Started with Create React App
+# Triplanner_ai
+•	A web application for creating and sharing trip itineraries using MERN stack (MongoDB, Express.js, React.js, Node.js)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+•	AI-powered for extracting points of interest and itinerary creation based on user input
+
+•	The AI used in this project enable users to create a trip itinerary in just 30 seconds, a significant improvement over traditional manual planning.
+
+•	Users can create an account and login to create and share trip itineraries with other users
+
+• Uses imgur API to upload images to the cloud and retrieve them for display
 
 ## Available Scripts
 
@@ -14,57 +21,25 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+### `node index.js`
+Runs the server in the development mode.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<!-- replace all the env variables -->
+## Environment Variables
+Replace all the environment variables in the .env file with your own values.
+### •	OpenAI variables
+### OPENAI_API_kEY & OPENAI_ORGANIZATION
+Create an account on OpenAI (https://platform.openai.com/account/api-keys) and get your API key and organization ID.
+### •	Amadeus variables
+### AMADEUS_CLIENT_ID & AMADEUS_CLIENT_SECRET
+Create an account on Amadeus (https://developers.amadeus.com/get-started) and get your client ID and secret.
+### •	MongoDB variables
+### mongodb_url
+Create an account on MongoDB (https://www.mongodb.com/cloud/atlas) and get your connection string.
+### •	Email variables
+### tripplanner_email & tripplanner_password
+Create an account on Gmail (https://mail.google.com/mail/u/0/#inbox) and get your email and password.
+### •	Imgur variables
+### IMGUR_CLIENT_ID
+If you want to uplaod images ananymously, no need to create an account on Imgur. Otherwise,
+Create an account on Imgur (https://api.imgur.com/oauth2/addclient) and get your client ID.

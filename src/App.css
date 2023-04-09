@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -35,4 +36,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+body.data.ds-theme.dark {
+  background-color: #282c34;
+  color: #fff;
+  
 }
